@@ -18,7 +18,9 @@ The name comes from 朱砂 (zhūshā), the red cinnabar pigment used on Chinese 
 ## Usage
 
 ```shell
-git clone https://github.com/lvyuemeng/cinnabar <path>
+git clone <repo> <path>
+# or
+git submodule add <path> <repo>
 ```
 
 ```typst
