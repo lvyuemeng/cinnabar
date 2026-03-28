@@ -182,9 +182,9 @@
     value: 16pt,
   ),
 ) = {
-  import "utils.typ": format-date, mask-field, normalise-title
+  import "utils.typ": format-date, mask-field, fill-lines
 
-  let title-lines = normalise-title(title, min-lines: min-title-lines)
+  let title-lines = fill-lines(title, min-lines: min-title-lines)
   let date        = format-date(submit-date)
   let safe-author = mask-field(author, anonymous)
   let safe-id     = mask-field(student-id, anonymous)

@@ -14,7 +14,7 @@
 #import "utils.typ": 字号, 字体
 
 // Utils: field and layout
-#import "utils.typ": mask-field, normalise-title, justify-text
+#import "utils.typ": mask-field, fill-lines, justify-text
 
 // Re-export modules for namespace access (e.g. components.cover, utils.mask-field)
 #import "components.typ" as components

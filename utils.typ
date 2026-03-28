@@ -77,10 +77,11 @@
   }
 }
 
-// Normalises a title argument to an array padded to at least min-lines entries.
+// Converts a title string or array into a padded array of exactly min-lines entries.
 // Accepts either a string (split on newline) or an array.
-// Pads short arrays with ideographic spaces to reach min-lines.
-#let normalise-title(title, min-lines: 2) = {
+// Pads short arrays with ideographic spaces so callers can use .. to expand
+// the result directly as grid rows without any further processing.
+#let fill-lines(title, min-lines: 2) = {
   let lines = if type(title) == str { title.split("\n") } else { title }
   if lines.len() < min-lines {
     lines = lines + range(min-lines - lines.len()).map(_ => "　")

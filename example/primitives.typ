@@ -4,7 +4,7 @@
 // primitives.typ — Atomic brick showcase
 // All cinnabar primitives demonstrated on a single page.
 // field-theme · section-header · meta-field · sig-row
-// double-underline · justify-text · 字号 · 字体
+// double-underline · justify-text · fill-lines · 字号 · 字体
 // ==========================================================
 
 #set page(paper: "a4", margin: (x: 3cm, top: 3cm, bottom: 2.5cm))
@@ -111,26 +111,46 @@
 #v(2em)
 
 // ----------------------------------------------------------
-// 7. normalise-title — string / array unification + padding
+// 7. fill-lines — pad title array for grid rows
 // ----------------------------------------------------------
 
-#section-header("7. normalise-title", font: 字体.黑体, size: 字号.三号, underline: false)
+#section-header("7. fill-lines — pad title array for grid rows", font: 字体.黑体, size: 字号.三号, underline: false)
 
-// String input — split on newline, padded to 3 lines
-#let lines-from-str = normalise-title("第一行\n第二行", min-lines: 3)
+// fill-lines pads a string or array to min-lines entries with ideographic spaces.
+// Use .. to spread the result directly into a grid as multiple row cells.
+
+// String input — split on "\n", padded to 3 lines
+#let lines-from-str = fill-lines("第一行\n第二行", min-lines: 3)
 // Array input — padded to 3 lines
-#let lines-from-arr = normalise-title(("第一行", "第二行"), min-lines: 3)
+#let lines-from-arr = fill-lines(("第一行", "第二行"), min-lines: 3)
 
+// Without fill-lines: title array used as-is in one cell
+#text(font: 字体.楷体, size: 字号.小四)[Without (2 items, joined):] \
 #grid(
   columns: (120pt, 1fr),
   row-gutter: 6pt,
-  text(font: 字体.楷体, size: 字号.小四)[Non-normalize:],
-  text(font: 字体.宋体, size: 字号.小四)[第一行 第二行],
-  text(font: 字体.楷体, size: 字号.小四)[string → 3 lines:],
-  ..lines-from-str,
-  // text(font: 字体.宋体, size: 字号.小四)[#lines-from-str],
-  text(font: 字体.楷体, size: 字号.小四)[array → 3 lines:],
-  text(font: 字体.宋体, size: 字号.小四)[#lines-from-arr.join(" / ")],
+  text(font: 字体.楷体, size: 字号.小四)[题　　目],
+  text(font: 字体.宋体, size: 字号.小四)[第一行 第二行（joined）],
+)
+
+#v(0.8em)
+
+// With fill-lines: spread into 3 separate grid rows
+#text(font: 字体.楷体, size: 字号.小四)[With fill-lines (string → 3 rows, ..spread):] \
+#grid(
+  columns: (120pt, 1fr),
+  row-gutter: 6pt,
+  text(font: 字体.楷体, size: 字号.小四)[题　　目], ..lines-from-str,
+)
+
+#v(0.8em)
+
+// Array input also padded to 3 rows
+#text(font: 字体.楷体, size: 字号.小四)[With fill-lines (array → 3 rows, ..spread):] \
+#grid(
+  columns: (120pt, 1fr),
+  row-gutter: 6pt,
+  text(font: 字体.楷体, size: 字号.小四)[题　　目], ..lines-from-arr,
 )
 
 #v(2em)
