@@ -1,11 +1,12 @@
 [package]
-name = "zh-draft"
+name = "cinnabar"
 version = "0.0.1"
 compiler = "0.14.0"
-repository = "https://github.com/lvyuemeng/"
+repository = "https://github.com/lvyuemeng/cinnabar"
 entrypoint = "lib.typ"
 authors = ["lvyuemeng <lv15623448685@gmail.com>"]
 license = "MIT"
-description = "A tool-kit containing components and utilities suitable for thesis in China."
-keywords = ["chinese", "cn", "kit", "component", "中文", "组件"]
-exclude = ["example/"]
+description = "Composable primitives for Chinese formal documents."
+keywords = ["chinese", "thesis", "academic", "components", "中文", "论文"]
+categories = ["office"]
+exclude = ["example/", "img/", "docs/"]

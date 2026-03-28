@@ -1,32 +1,39 @@
-<div style="text-align: center;">
+# cinnabar
 
-# zh-draft
+**cinnabar** is a [Typst](https://typst.app) library of composable primitives and utilities for typesetting Chinese formal documents — thesis covers, abstracts, originality statements, acknowledgements, and more.
 
-</div>
+The name comes from 朱砂 (zhūshā), the red cinnabar pigment used on Chinese official seals and the ruled grids of traditional manuscript paper.
 
-**`CN-Kit`** is a tool-kit containing several components and utilities for `typst`. You should refer to [Typst Docs](https://typst.app/docs/) if you don't know it. It's suitable for those struggling on format of thesis in China. However, it's adaptable for anyone if it **aids** you.
+## Features
 
-## Introduction
-
-Currently, it contains only few things in [`components.typ`](components.typ) only about grid tables.
-
-Here the handy case:
-
-![Handy case](img/handy.png)
-
-_Waiting for improvement..._
+- `field-theme` — factory that returns configurable label/value cell builders for structured form layouts
+- `cover` — Chinese undergraduate/graduate thesis cover page
+- `abstract-zh` — Chinese abstract page with metadata fields and keyword list
+- `abstract-en` — English abstract page
+- `originality` — 原创性声明 (statement of originality) with signature lines
+- `acknowledgements` — 致谢 section
+- `double-underline`, `hidden-heading` — atomic layout primitives
+- `format-date`, `mask-field`, `join-by-sep` — pure utility functions
 
 ## Usage
 
-Currently, it's not adaptable on [Typst Universe](https://typst.app/universe/). I will publish it until it's mature or never due to violation of certain criteria.
-
 ```shell
-git clone <repo> <path>
+git clone https://github.com/lvyuemeng/cinnabar <path>
 ```
 
 ```typst
-#import "<path to package>/lib.typ": *
+#import "<path>/lib.typ": *
 ```
+
+Once published to Typst Universe:
+
+```typst
+#import "@preview/cinnabar:0.1.0": *
+```
+
+## Anonymous / blind-review mode
+
+Pass `anonymous: true` to any component to replace all identifying fields (author, student ID, supervisor) with block-character masks.
 
 ## License
 
