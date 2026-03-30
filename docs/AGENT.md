@@ -1,4 +1,4 @@
-# AGENT.md â€” cinnabar Contributor Guide
+# AGENT.md â€?cinnabar Contributor Guide
 
 > For project overview, file structure, component catalogue, and roadmap, see `docs/ARCHITECTURE.md`.
 
@@ -9,7 +9,7 @@
 ### 1. Separation of concerns
 
 - `utils.typ` contains **pure functions** with no rendering side-effects. Every function in it takes plain values and returns plain values or strings.
-- `components.typ` contains **rendering primitives** â€” functions that produce Typst content. They never perform data transformation beyond what is strictly needed for display.
+- `components.typ` contains **rendering primitives** â€?functions that produce Typst content. They never perform data transformation beyond what is strictly needed for display.
 - `lib.typ` is a **thin re-export layer** only. It must not contain logic.
 
 ### 2. Theme-based configuration over global state
@@ -18,7 +18,7 @@ Components accept explicit font/size/style arguments rather than relying on `set
 
 ### 3. Graceful handling of CJK layout quirks
 
-Typst's default metrics can misalign CJK and Latin glyphs. The invisible strut pattern â€” `box(width: 0pt, hide(text(font: "KaiTi", ...)[""]))` â€” is the established fix used throughout `components.typ`. Preserve it whenever adding new cell renderers.
+Typst's default metrics can misalign CJK and Latin glyphs. The invisible strut pattern â€?`box(width: 0pt, hide(text(font: "KaiTi", ...)[""]))` â€?is the established fix used throughout `components.typ`. Preserve it whenever adding new cell renderers.
 
 ### 4. Anonymization as a first-class concern
 
@@ -26,7 +26,7 @@ Thesis submission often requires blind review. The `mask-field` utility in `util
 
 ### 5. Generalized patterns over repetitive style rebuilds
 
-Every new page component must be built from existing primitives (`field-theme`, `mask-field`, `hidden-heading`, etc.) rather than reimplementing the same label/value cell, anonymization check, or title-normalisation logic inline. If a pattern appears twice, it belongs in `utils.typ` or `components.typ`. Study the NJU thesis codebase (`../ai/modern-nju-thesis/`) as a cautionary example of what happens without this discipline â€” the same `info-key`/`info-value` helper is rewritten in every page file.
+Every new page component must be built from existing primitives (`field-theme`, `mask-field`, `hidden-heading`, etc.) rather than reimplementing the same label/value cell, anonymization check, or title-normalisation logic inline. If a pattern appears twice, it belongs in `utils.typ` or `components.typ`. Study the NJU thesis codebase (`../ai/modern-nju-thesis/`) as a cautionary example of what happens without this discipline â€?the same `info-key`/`info-value` helper is rewritten in every page file.
 
 ### 6. Factory and essential functions over pre-given style components
 
@@ -58,7 +58,7 @@ Key sections to check:
 | Removed | Native equivalent |
 |---|---|
 | `list-of-figures` / `list-of-tables` | `outline(target: figure.where(kind: image))` |
-| `format-date` | `date.display("[year]å¹´[month]æœˆ[day]æ—¥")` |
+| `format-date` | `date.display("[year]å¹´[month]æœˆ[day]æ—?)` |
 | `join-by-sep` | `array.join(sep)` / identity for strings |
 
 ---
@@ -80,7 +80,7 @@ Key sections to check:
 
 1. Implement the rendering function in `components.typ`.
 2. If it requires new data-transformation helpers, add them to `utils.typ`.
-3. Do **not** modify `lib.typ` â€” the wildcard re-export picks up everything automatically.
+3. Do **not** modify `lib.typ` â€?the wildcard re-export picks up everything automatically.
 4. Add a minimal usage example under `example/`.
 5. Update `docs/ARCHITECTURE.md` if the component introduces a new structural concept.
 
@@ -91,3 +91,23 @@ Key sections to check:
 1. Utilities must be **pure**: no `place`, no `grid`, no Typst layout calls.
 2. Write a brief inline comment describing inputs and outputs.
 3. Add a demonstration to an existing or new file under `example/`.
+
+---
+
+## Workflow
+
+### Reference Documentation
+
+- **Typst official docs:** https://typst.app/docs/
+  The authoritative reference for all Typst built-ins, syntax, and standard library. Consult this before implementing any new function (see Core Philosophy Â§8).
+
+### Reference Repositories
+
+Study these repos to understand real-world Chinese thesis typesetting patterns â€?and their tradeoffs â€?before designing new components:
+
+| Repo | Purpose |
+|---|---|
+| [modern-nju-thesis](https://github.com/nju-lug/modern-nju-thesis) | NJU undergraduate/graduate thesis template. Useful reference for layout conventions; note the repeated `info-key`/`info-value` pattern as a cautionary example (see Core Philosophy Â§5). |
+| [modern-ruc-thesis](https://github.com/ruc-thesis/modern-ruc-thesis) | RUC thesis template. Additional reference for cover, abstract, and TOC layout decisions specific to Chinese university standards. |
+
+> When referencing these repos, extract the **pattern**, not the code. Adapt to cinnabar abstractions (`field-theme`, `fill-lines-cells`, etc.) rather than copying inline style logic.
